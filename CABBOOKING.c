@@ -121,7 +121,7 @@ int main()
     // Load users from the file
     readUsersFromFile();
 
-    printf("[ WELCOME TO OUR CAB BOOKING SERVICES ]\n");
+    printf("\n[ WELCOME TO OUR CAB BOOKING SERVICES ]\n");
 
     do
     {
