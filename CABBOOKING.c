@@ -246,14 +246,14 @@ data distance_()
     {
         ref1 = coordinates(sectorin);
         deref.sector = sectorin;
+        deref.condition = 1;
 
         printf("ENTER DESTINATION : ");
         scanf("%d", &sectorout);
         display_line();
-        if (sectorout < 17 && sectorout > 0)
+        if (sectorout <= 16 && sectorout >= 1)
         {
             ref2 = coordinates(sectorout);
-
             float distance;
             distance = distance_calculator(ref1.x, ref1.y, ref2.x, ref2.y);
             float time;
@@ -264,11 +264,12 @@ data distance_()
             printf("Total Distance          : %.2f km\n", distance);
             printf("Total Time for Journey  : %.2f min\n", time);
             deref.condition = 0;
+            deref.sector = sectorout;
         }
     }
     else
     {
-        printf("Invalid choice. Please try again.\n");
+        // printf("Invalid choice. Please try again.\n");
         deref.condition = 1;
     }
     return deref;
@@ -505,26 +506,25 @@ void booking()
     dum = distance_();
     if (dum.condition == 0 || dum.condition != 1)
     {
-        if (dum_dum.condition2 == 1 || dum_dum.condition2 != 0)
-        {
-            dum_dum = baserate(dum);
+        dum_dum = baserate(dum);
 
-            dummy = price_calculator(dum, dum.distance, dum_dum.brate);
+        dummy = price_calculator(dum, dum.distance, dum_dum.brate);
 
-            printf("\nTotal Cost of Journey: %.2f Rs\n\n", dummy);
+        printf("\nTotal Cost of Journey: %.2f Rs\n\n", dummy);
 
-            printf("Your driver details are : \n");
-            display_line();
+        printf("Your driver details are : \n");
+        display_line();
 
-            driver_details(dum_dum);
+        driver_details(dum_dum);
 
-            driver_coordinates();
-            display_line();
-        }
+        driver_coordinates();
+        display_line();
     }
+
     else
     {
         printf("Invalid choice. Please try again.\n");
+        // deref.condition = 1;
     }
 }
 
@@ -538,59 +538,67 @@ data_check baserate(data dum)
     temp1 = availability_(dum);
     printf("Select your Ride : \n");
     display_line();
-
-    if (temp1.bike != 0)
+    if (dum.condition == 1 || dum.condition != 0)
     {
-        printf("\t1. Bike                 Availability : %d\n", temp1.bike);
-    }
-    if (temp1.autoo != 0)
-    {
-        printf("\t2. Auto                 Availability : %d\n", temp1.autoo);
-    }
-    if (temp1.ecocabs != 0)
-    {
-        printf("\t3. Economy Cab          Availability : %d\n", temp1.ecocabs);
-    }
-    if (temp1.precabs != 0)
-    {
-        printf("\t4. Premium Cab          Availability : %d\n", temp1.precabs);
-    }
-    scanf("%d", &n);
-    if (n == 1 && temp1.bike != 0)
-    {
-        base_rate = BIKE_RATES;
-        temp1.bike--;
-        ref.bike = 1;
-        ref.condition2 = 1;
-    }
-    else if (n == 2 && temp1.autoo != 0)
-    {
-        base_rate = AUTO_RATES;
-        temp1.autoo--;
-        ref.auto1 = 1;
-        ref.condition2 = 1;
-    }
-    else if (n == 3 && temp1.ecocabs != 0)
-    {
-        base_rate = ECONOMY_RATES;
-        temp1.ecocabs--;
-        ref.condition2 = 1;
-        ref.economyCabs = 1;
-    }
-    else if (n == 4 && temp1.precabs != 0)
-    {
-        base_rate = PREMIUM_RATES;
-        temp1.precabs--;
-        ref.condition2 = 1;
-        ref.premiumCabs = 1;
+        if (temp1.bike != 0)
+        {
+            printf("\t1. Bike                 Availability : %d\n", temp1.bike);
+        }
+        if (temp1.autoo != 0)
+        {
+            printf("\t2. Auto                 Availability : %d\n", temp1.autoo);
+        }
+        if (temp1.ecocabs != 0)
+        {
+            printf("\t3. Economy Cab          Availability : %d\n", temp1.ecocabs);
+        }
+        if (temp1.precabs != 0)
+        {
+            printf("\t4. Premium Cab          Availability : %d\n", temp1.precabs);
+        }
+        scanf("%d", &n);
+        if (n == 1 && temp1.bike != 0)
+        {
+            base_rate = BIKE_RATES;
+            temp1.bike--;
+            ref.bike = 1;
+            ref.condition2 = 1;
+        }
+        else if (n == 2 && temp1.autoo != 0)
+        {
+            base_rate = AUTO_RATES;
+            temp1.autoo--;
+            ref.auto1 = 1;
+            ref.condition2 = 1;
+        }
+        else if (n == 3 && temp1.ecocabs != 0)
+        {
+            base_rate = ECONOMY_RATES;
+            temp1.ecocabs--;
+            ref.condition2 = 1;
+            ref.economyCabs = 1;
+        }
+        else if (n == 4 && temp1.precabs != 0)
+        {
+            base_rate = PREMIUM_RATES;
+            temp1.precabs--;
+            ref.condition2 = 1;
+            ref.premiumCabs = 1;
+        }
+        else
+        {
+            display_line();
+            printf("Invalid Responce \n");
+            ref.condition2 = 0;
+        }
+        ref.brate = base_rate;
+        // return ref;
     }
     else
     {
-        display_line();
-        printf("Invalid Responce \n");
-        ref.condition2 = 0;
+        printf("Invalid choice. Please try again.\n");
+        // deref.condition = 1;
     }
-    ref.brate = base_rate;
     return ref;
 }
 
