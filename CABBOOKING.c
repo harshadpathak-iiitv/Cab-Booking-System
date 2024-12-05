@@ -121,7 +121,9 @@ int main()
     // Load users from the file
     readUsersFromFile();
 
-    printf("\n[ WELCOME TO OUR CAB BOOKING SERVICES ]\n");
+    printf("\n\t\t\t   [ WELCOME TO OUR CAB BOOKING SERVICES ]\n\t\t\t\t\t[ TOWN_CRUISE ]\n\t\t\t     - Fast, smooth, and Always Ready to Go -\n");
+
+    printf("\n Project by : \n\tSwastika Saraogi\t202451181\n\tHarshad Pathak  \t202451072\n\n");
 
     do
     {
@@ -181,7 +183,6 @@ int main()
                 break;
             case 3:
                 printf("Thank You for using our Cab Booking Services.\nHope you have a safe Journey :)\n");
-                printf("Exiting...\n");
                 display_line();
                 break;
             default:
@@ -538,7 +539,7 @@ data_check baserate(data dum)
     temp1 = availability_(dum);
     printf("Select your Ride : \n");
     display_line();
-    if (dum.condition == 1 || dum.condition != 0)
+    if (dum.condition == 1 || dum.condition == 0)
     {
         if (temp1.bike != 0)
         {
@@ -683,7 +684,7 @@ void menu()
             userMenu();
             break;
         case 3:
-            printf("Exiting...\n");
+            printf("Exiting...\n Project by : \n\tSwastika Saraogi\t202451181\n\tHarshad Pathak  \t202451072");
             display_line();
             break;
         default:
